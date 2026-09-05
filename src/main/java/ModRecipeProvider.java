@@ -1,6 +1,6 @@
 //? fabric && != 1.20.1 {
 
-/*import dev.doctorm4id.rot.TheRot;
+import dev.doctorm4id.rot.TheRot;
 import net.minecraft.data.PackOutput;
 
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
@@ -33,16 +33,16 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 		provider.buildRecipes(recipeOutput);
 	}
 	//? } else {
-	/^// doesn't work, prob since I switched this 1.19.2 code to 1.20.1. :C
-/^¹	@Override
+	/*// doesn't work, prob since I switched this 1.19.2 code to 1.20.1. :C
+/^	@Override
 	protected @NotNull RecipeProvider createRecipeProvider(HolderLookup.Provider provider, RecipeOutput recipeOutput) {
 		return new IntRecipeProvider(provider, recipeOutput);
-	}¹^/
+	}^/
 	@Override
 	public void buildRecipes(RecipeOutput exporter) {
 
 	}
-	^///? }
+	*///? }
 
 
 	@Override
@@ -63,8 +63,8 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 					.save(recipeOutput, "lava_chicken_recipe");
 		}
 		//? } else {
-		/^// doesn't work, prob since I switched this 1.19.2 code to 1.20.1. :C
-/^¹		protected IntRecipeProvider(HolderLookup.Provider provider, RecipeOutput recipeOutput) {
+		/*// doesn't work, prob since I switched this 1.19.2 code to 1.20.1. :C
+/^		protected IntRecipeProvider(HolderLookup.Provider provider, RecipeOutput recipeOutput) {
 			super(provider, recipeOutput);
 		}
 
@@ -73,12 +73,12 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 			final var itemLookup = registries.lookupOrThrow(Registries.ITEM);
 			buildLavaChickenRecipe(ShapelessRecipeBuilder.shapeless(itemLookup, RecipeCategory.FOOD, Items.COOKED_CHICKEN))
 					.save(output, "lava_chicken_recipe");
-		}¹^/
+		}^/
 		@Override
 		public void buildRecipes(RecipeOutput recipeOutput) {
 
 		}
-		^///? }
+		*///? }
 
 		private ShapelessRecipeBuilder buildLavaChickenRecipe(ShapelessRecipeBuilder builder) {
 			return builder.requires(Items.LAVA_BUCKET)
@@ -88,4 +88,4 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 		}
 	}
 }
-*///?}
+//?}

@@ -1,8 +1,8 @@
 package dev.doctorm4id.rot.systems
 
+import dev.doctorm4id.m4id.util.M4idBlockUtil
+import dev.doctorm4id.m4id.util.M4idTickUtil
 import dev.doctorm4id.rot.content.ModContent
-import dev.doctorm4id.stoatlib.util.StoatBlockUtil
-import dev.doctorm4id.stoatlib.util.StoatTickUtil
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet
 import net.minecraft.core.BlockPos
 import net.minecraft.world.level.Level
@@ -42,9 +42,9 @@ open class VirtualCursor(var level: Level) : ICursor {
 	private val positionsSearched: LongOpenHashSet = LongOpenHashSet()
 	val visitedPositions: MutableSet<Long> = HashSet()
 
+	// These gets overridden anyway.
 	protected open fun isTarget(level: Level, pos: BlockPos): Boolean = !getWorld().getBlockState(pos).`is`(ModContent.BlockTags.ROT_FAMILY)
 	protected open fun changeBlock(pos: BlockPos) { getWorld().setBlock(pos, ModContent.NULL_CYAN.defaultBlockState(), 3) }
-
 	protected open fun isObstructed(state: BlockState, pos: BlockPos): Boolean {
 		//if (BlockUtil.getBlockDistanceSquared(origin, pos) > 20 * 20) return true
 		//if (StoatBlockUtil.isAir(state)) return true
@@ -54,7 +54,7 @@ open class VirtualCursor(var level: Level) : ICursor {
 	}
 
 	private fun hasExpired(): Boolean {
-		return (getWorld().gameTime - creationTime) > StoatTickUtil.convertMinutesToTicks(2)
+		return (getWorld().gameTime - creationTime) > M4idTickUtil.convertMinutesToTicks(2)
 	}
 
 	override fun tick() {
@@ -141,7 +141,7 @@ open class VirtualCursor(var level: Level) : ICursor {
 		for (offset in NEIGHBOR_OFFSETS) {
 			val neighbor = pos.offset(offset)
 			if (!isObstructed(getWorld().getBlockState(neighbor), neighbor)) {
-				val distSq = StoatBlockUtil.getBlockDistanceSquared(neighbor, currentTarget)
+				val distSq = M4idBlockUtil.getBlockDistanceSquared(neighbor, currentTarget)
 
 				if (distSq < minDistanceSq) {
 					minDistanceSq = distSq.toLong()

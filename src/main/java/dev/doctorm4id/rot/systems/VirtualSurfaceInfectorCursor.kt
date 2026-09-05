@@ -1,7 +1,7 @@
 package dev.doctorm4id.rot.systems
 
+import dev.doctorm4id.m4id.util.M4idBlockUtil
 import dev.doctorm4id.rot.content.ModContent
-import dev.doctorm4id.stoatlib.util.StoatBlockUtil
 import net.minecraft.core.BlockPos
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.level.Level
@@ -17,31 +17,28 @@ class VirtualSurfaceInfectorCursor(level: ServerLevel) : VirtualCursor(level) {
 
 	override fun changeBlock(pos: BlockPos) {
 		InfestationSystem.infestPosition(getWorld() as ServerLevel, pos)
-		//getWorld().setBlock(pos, ModContent.ROTTED_BLOCK.defaultBlockState(), 3)
 	}
 
 	override fun isObstructed(state: BlockState, pos: BlockPos): Boolean {
 
-		if (StoatBlockUtil.isAir(state)) {
-			return true
-		} else if (visitedPositions.contains(pos.asLong())) {
-			return true
-		} else if ((state.`is`(Blocks.WATER) || state.`is`(Blocks.BUBBLE_COLUMN))) {
-			return true
-		} else if (StoatBlockUtil.isNotSolid(pos, getWorld()) && false) {
-			return true
-		}
+		if (M4idBlockUtil.isAir(state)) return true
 
-		return false //!shouldInfest(getWorld(), pos)
+		if (visitedPositions.contains(pos.asLong())) return true
+
+		if ((state.`is`(Blocks.WATER) || state.`is`(Blocks.BUBBLE_COLUMN))) return true
+
+		if (M4idBlockUtil.isNotSolid(pos, getWorld()) && false) return true
+
+		return false
 	}
 
 	fun shouldInfest(level: Level, pos: BlockPos): Boolean {
-		val neighbors = StoatBlockUtil.getNeighborsCube(pos, false).filterNotNull()
+		val neighbors = M4idBlockUtil.getNeighborsCube(pos, false).filterNotNull()
 
 		val rotNeighbors = neighbors.count { level.getBlockState(it).`is`(ModContent.BlockTags.ROT_FAMILY) }
-		val exposed = if (StoatBlockUtil.isExposedToAir(pos, level)) 1.0 else 0.2
+		val exposed = if (M4idBlockUtil.isExposedToAir(pos, level)) 1.0 else 0.2
 		val wetBonus = if (level.getFluidState(pos).isSource) 0.2 else 0.0
-		val distance = if (StoatBlockUtil.getBlockDistanceSquared(origin, pos) < 10 * 10) 1.0 else 0.5
+		val distance = if (M4idBlockUtil.getBlockDistanceSquared(origin, pos) < 10 * 10) 1.0 else 0.5
 
 		val base = 0.15
 		val chance = (((base + (rotNeighbors * 0.3).coerceIn(0.0, 1.0)) * exposed) * distance)
@@ -50,19 +47,4 @@ class VirtualSurfaceInfectorCursor(level: ServerLevel) : VirtualCursor(level) {
 
 		return willInfest
 	}
-
-/*	fun shouldInfest(pos: BlockPos): Boolean {
-		val neighbors = StoatBlockUtil.getNeighborsCube(pos, false).filterNotNull()
-
-		val rotNeighbors = neighbors.count { level.getBlockState(it).`is`(ModRegistry.BlockTags.ROT_FAMILY) }
-		val exposed = if (StoatBlockUtil.isExposedToAir(pos, getWorld())) 1.0 else 0.05
-		//val darkness = 15 - level.getMaxLocalRawBrightness(pos)
-		val wetBonus = if (getWorld().getFluidState(pos).isSource) 0.2 else 0.0
-		//val distance = if (StoatBlockUtil.getBlockDistanceSquared(origin, pos) < 10 * 10) 1.0 else 0.2
-		//val maxDistance = if (StoatBlockUtil.getBlockDistanceSquared(origin, pos) < 15 * 15) 1.0 else 0.1
-
-		val base = 0.02
-		val chance = ((base + (rotNeighbors * 0.1) *//*+ darkness * 0.01*//* + wetBonus) * exposed)// * distance) * maxDistance
-		return getWorld().random.nextDouble() < chance.coerceIn(0.0, 0.95)
-	}*/
 }

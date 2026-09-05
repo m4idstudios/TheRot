@@ -2,7 +2,7 @@ package dev.doctorm4id.rot.platform.fabric
 
 //? fabric {
 
-/*import dev.doctorm4id.rot.platform.Platform
+import dev.doctorm4id.rot.platform.Platform
 import net.fabricmc.loader.api.FabricLoader
 
 class FabricPlatform : Platform {
@@ -24,4 +24,4 @@ class FabricPlatform : Platform {
 	}
 }
 
-*///? }
+//? }

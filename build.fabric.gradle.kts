@@ -105,5 +105,5 @@ dependencies {
 	modImplementation("net.fabricmc.fabric-api:fabric-api:${prop("deps.fabric-api")}")
 	// modLocalRuntime("com.terraformersmc:modmenu:${prop("deps.modmenu")}")
 
-	modImplementation(files("libs/stoatlib-0.1.0-alpha.3-fabric+1.21.1-SNAPSHOT.jar"))
+	modImplementation(files("libs/m4id-0.1.0-alpha.1-fabric+1.21.1-SNAPSHOT.jar"))
 }

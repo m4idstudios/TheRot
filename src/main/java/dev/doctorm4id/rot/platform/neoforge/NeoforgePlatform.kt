@@ -2,7 +2,7 @@ package dev.doctorm4id.rot.platform.neoforge
 
 //? neoforge {
 
-import dev.doctorm4id.rot.platform.Platform
+/*import dev.doctorm4id.rot.platform.Platform
 import net.neoforged.fml.ModList
 import net.neoforged.fml.loading.FMLLoader
 
@@ -25,4 +25,4 @@ class NeoforgePlatform : Platform {
 	}
 }
 
-//? }
+*///? }

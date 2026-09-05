@@ -1,5 +1,6 @@
 package dev.doctorm4id.rot.systems
 
+import dev.doctorm4id.rot.TheRot
 import net.minecraft.core.BlockPos
 import net.minecraft.server.level.ServerLevel
 
@@ -29,7 +30,8 @@ object CursorManager {
 		if (cleanCooldown-- <= 0) {
 			virtualCursor.clean()
 			cleanCooldown = 20
-			println("Cursors -> "+list.size)
+
+			TheRot.LOGGER.debug("Cursor Size: $maxCursors")
 		}
 
 		val toProcess = list.filter { !it.isExpired() }.take(maxCursors)
@@ -37,21 +39,6 @@ object CursorManager {
 		for (list in toProcess) {
 			list.tick()
 		}
-
-/*		while (processed < maxCursors && scanned < size && list.isNotEmpty()) {
-			val index = virtualCursorIndex % size
-			val cursor = list[index]
-
-			if (!cursor.isExpired()) {
-				cursor.tick()
-				processed++
-			}
-
-			virtualCursorIndex++
-			scanned++
-		}
-
-		virtualCursorIndex = (virtualCursorIndex + scanned) % size*/
 	}
 }
 

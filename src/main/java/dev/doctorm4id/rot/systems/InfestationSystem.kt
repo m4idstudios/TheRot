@@ -1,26 +1,30 @@
 package dev.doctorm4id.rot.systems
 
+import dev.doctorm4id.m4id.util.M4idBlockUtil
+import dev.doctorm4id.m4id.util.M4idPoolBlocks
 import dev.doctorm4id.rot.content.ModContent
-import dev.doctorm4id.stoatlib.util.PoolBlocks
-import dev.doctorm4id.stoatlib.util.StoatBlockUtil
 
 import net.minecraft.core.BlockPos
 import net.minecraft.core.particles.SculkChargeParticleOptions
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
+import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.LeavesBlock
 import net.minecraft.world.level.block.SlabBlock
 import net.minecraft.world.level.block.StairBlock
-import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
-import net.minecraft.world.level.block.state.properties.Property
 
 object InfestationSystem {
 
-	private val randomCyst = PoolBlocks.apply {
+	private val randomCyst = M4idPoolBlocks.apply {
 		addEntry(ModContent.ROTTED_BLOCK, 100)
 		addEntry(ModContent.BLOOMING_CYST_BLOCK, 10)
+	}
+
+	private val randomFlora = M4idPoolBlocks.apply {
+		addEntry(Blocks.AIR, 100)
+		addEntry(ModContent.ROTTED_GRASS, 10)
 	}
 
 	fun infestPosition(level: ServerLevel, pos: BlockPos) {
@@ -44,7 +48,7 @@ object InfestationSystem {
 		val cyst = randomCyst.getRandomEntry() ?: return
 		val blockState = level.getBlockState(pos)
 
-		val newState = when (val block = level.getBlockState(pos).block) {
+		val newState = when (level.getBlockState(pos).block) {
 			is StairBlock -> ModContent.ROTTED_STAIR.defaultBlockState()
 				.setValue(StairBlock.FACING, blockState.getValue(StairBlock.FACING))
 				.setValue(StairBlock.HALF, blockState.getValue(StairBlock.HALF))
@@ -60,10 +64,21 @@ object InfestationSystem {
 				.setValue(LeavesBlock.PERSISTENT, true)
 
 			else -> {
-				if (StoatBlockUtil.isSolid(pos, level)) cyst.defaultBlockState() else return
+				if (M4idBlockUtil.isSolid(pos, level)) cyst.defaultBlockState() else return
 			}
 		}
 
+		placeFlora(level, pos)
+
 		level.setBlock(pos, newState, 3)
+	}
+
+	private fun placeFlora(level: ServerLevel, pos: BlockPos) {
+		val flora = randomFlora.getRandomEntry() ?: return
+		val offsetPos = pos.offset(0,1,0)
+
+		if (!M4idBlockUtil.isNotSolid(offsetPos, level)) {
+			level.setBlock(offsetPos, flora.defaultBlockState(), 3)
+		}
 	}
 }

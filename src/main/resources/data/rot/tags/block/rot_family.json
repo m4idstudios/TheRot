@@ -5,6 +5,7 @@
     "rot:null_cyan",
     "rot:rotted_leaves",
     "rot:rotted_stair",
-    "rot:rotted_slab"
+    "rot:rotted_slab",
+    "rot:rotted_grass"
   ]
 }

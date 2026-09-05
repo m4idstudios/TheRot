@@ -2,7 +2,7 @@ package dev.doctorm4id.rot.platform.neoforge
 
 //? neoforge {
 
-import dev.doctorm4id.rot.content.ModContent
+/*import dev.doctorm4id.rot.content.ModContent
 import dev.doctorm4id.rot.event.ExampleEventHandler
 import dev.doctorm4id.rot.systems.CursorManager
 import dev.doctorm4id.stoatlib.registration.StoatRegistrar
@@ -47,4 +47,4 @@ object NeoforgeEventSubscriber {
 	}
 }
 
-//? }
+*///? }

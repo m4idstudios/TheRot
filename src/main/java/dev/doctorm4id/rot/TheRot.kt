@@ -6,16 +6,16 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 //? fabric {
-/*import dev.doctorm4id.rot.platform.fabric.FabricPlatform
+import dev.doctorm4id.rot.platform.fabric.FabricPlatform
 import net.minecraft.client.renderer.RenderType
 import net.minecraft.core.registries.Registries
 import net.minecraft.tags.TagKey
 import net.minecraft.world.level.block.Block
-*///? }
+//? }
 
 //? neoforge {
-import dev.doctorm4id.rot.platform.neoforge.NeoforgePlatform
-//? }
+/*import dev.doctorm4id.rot.platform.neoforge.NeoforgePlatform
+*///? }
 
 @SuppressWarnings("LoggingSimilarMessage")
 class TheRot {
@@ -45,10 +45,10 @@ class TheRot {
 
 	private fun createPlatformInstance(): Platform {
 		//? fabric {
-		/*return FabricPlatform()
-		*///?} neoforge {
-		return NeoforgePlatform()
-		//?}
+		return FabricPlatform()
+		//?} neoforge {
+		/*return NeoforgePlatform()
+		*///?}
 	}
 
 	fun id(path: String?): ResourceLocation {
@@ -66,5 +66,4 @@ class TheRot {
 		/*return ResourceLocation(namespace!!, path!!);
 		*///?}
 	}
-
 }

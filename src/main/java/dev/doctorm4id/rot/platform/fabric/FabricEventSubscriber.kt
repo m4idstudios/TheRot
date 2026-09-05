@@ -2,7 +2,7 @@ package dev.doctorm4id.rot.platform.fabric
 
 //? fabric {
 
-/*import dev.doctorm4id.rot.event.ExampleEventHandler
+import dev.doctorm4id.rot.event.ExampleEventHandler
 import dev.doctorm4id.rot.systems.CursorManager
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents
@@ -27,4 +27,4 @@ class FabricEventSubscriber {
 	}
 }
 
-*///? }
+//? }

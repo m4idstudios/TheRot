@@ -2,7 +2,7 @@ package dev.doctorm4id.rot.platform.neoforge
 
 //? neoforge {
 
-import dev.doctorm4id.rot.TheRot
+/*import dev.doctorm4id.rot.TheRot
 import net.neoforged.api.distmarker.Dist
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.common.EventBusSubscriber
@@ -23,4 +23,4 @@ object NeoforgeClientEventSubscriber {
 		}*/
 	}
 }
-//? }
+*///? }
