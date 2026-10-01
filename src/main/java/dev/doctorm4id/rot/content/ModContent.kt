@@ -10,6 +10,7 @@ import dev.doctorm4id.rot.content.item.CursorWand
 import dev.doctorm4id.rot.content.item.InfestWand
 import net.minecraft.core.registries.Registries
 import net.minecraft.tags.TagKey
+import net.minecraft.world.entity.EntityType
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.Rarity
@@ -64,6 +65,7 @@ object ModContent : M4idAutoRegistrar {
 	val NULL_CYAN by "null_cyan" forBlock { Block(BlockBehaviour.Properties.of() ) }
 
 	val NULL_PINK by "null_pink" forBlock { Block(BlockBehaviour.Properties.of() ) }
+
 
 	override fun getId(): String = TheRot.MOD_ID
 

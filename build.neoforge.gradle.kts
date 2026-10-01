@@ -109,6 +109,8 @@ repositories {
 			includeGroup("dev.ryanhcode.sable-companion")
 		}
 	}
+
+	maven { url = uri("https://jitpack.io") }
 }
 
 dependencies {
@@ -124,7 +126,8 @@ dependencies {
 	}
 
 	//implementation("maven.modrinth:u9SU7fm1:FynWnuN5")
-	implementation(files("libs/stoatlib-0.1.0-alpha.3-neoforge+1.21.1-SNAPSHOT.jar"))
+	//implementation(files("libs/stoatlib-0.1.0-alpha.3-neoforge+1.21.1-SNAPSHOT.jar"))
+	implementation("com.github.DoctorM4id.M4id:m4id-1.21.1-neoforge:0.1.0-alpha.2")
 }
 
 tasks.named("createMinecraftArtifacts") {

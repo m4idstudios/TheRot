@@ -1,7 +1,7 @@
 package dev.doctorm4id.rot.systems
 
 import dev.doctorm4id.m4id.util.M4idBlockUtil
-import dev.doctorm4id.m4id.util.M4idPoolBlocks
+import dev.doctorm4id.m4id.util.M4idPool
 import dev.doctorm4id.rot.content.ModContent
 
 import net.minecraft.core.BlockPos
@@ -9,6 +9,7 @@ import net.minecraft.core.particles.SculkChargeParticleOptions
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
+import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.LeavesBlock
 import net.minecraft.world.level.block.SlabBlock
@@ -17,12 +18,12 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties
 
 object InfestationSystem {
 
-	private val randomCyst = M4idPoolBlocks.apply {
+	private val randomCyst = M4idPool<Block>().apply {
 		addEntry(ModContent.ROTTED_BLOCK, 100)
 		addEntry(ModContent.BLOOMING_CYST_BLOCK, 10)
 	}
 
-	private val randomFlora = M4idPoolBlocks.apply {
+	private val randomFlora = M4idPool<Block>().apply {
 		addEntry(Blocks.AIR, 100)
 		addEntry(ModContent.ROTTED_GRASS, 10)
 	}
@@ -42,6 +43,8 @@ object InfestationSystem {
 		)
 
 		infestBlock(level, pos)
+
+		//placeFlora(level, pos)
 	}
 
 	private fun infestBlock(level: ServerLevel, pos: BlockPos) {
@@ -68,8 +71,6 @@ object InfestationSystem {
 			}
 		}
 
-		placeFlora(level, pos)
-
 		level.setBlock(pos, newState, 3)
 	}
 
@@ -77,7 +78,7 @@ object InfestationSystem {
 		val flora = randomFlora.getRandomEntry() ?: return
 		val offsetPos = pos.offset(0,1,0)
 
-		if (!M4idBlockUtil.isNotSolid(offsetPos, level)) {
+		if (level.getBlockState(offsetPos).block.defaultBlockState().isAir) {
 			level.setBlock(offsetPos, flora.defaultBlockState(), 3)
 		}
 	}

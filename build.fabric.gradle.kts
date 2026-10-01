@@ -82,6 +82,7 @@ repositories {
 
 	strictMaven("https://maven.terraformersmc.com/", "com.terraformersmc") { name = "TerraformersMC" }
 	strictMaven("https://api.modrinth.com/maven", "maven.modrinth") { name = "Modrinth" }
+	maven { url = uri("https://jitpack.io") }
 }
 
 configurations.all {
@@ -105,5 +106,6 @@ dependencies {
 	modImplementation("net.fabricmc.fabric-api:fabric-api:${prop("deps.fabric-api")}")
 	// modLocalRuntime("com.terraformersmc:modmenu:${prop("deps.modmenu")}")
 
-	modImplementation(files("libs/m4id-0.1.0-alpha.1-fabric+1.21.1-SNAPSHOT.jar"))
+	//modImplementation(files("libs/m4id-0.1.0-alpha.1-fabric+1.21.1-SNAPSHOT.jar"))
+	modImplementation("com.github.DoctorM4id.M4id:m4id-1.21.1-fabric:0.1.0-alpha.2")
 }
