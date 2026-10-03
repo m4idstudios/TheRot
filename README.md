@@ -7,7 +7,7 @@
 </a>
 
 </a>
-<a href="https://discord.stoatdev.team/"><img src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3.3.1/assets/cozy/social/discord-plural_64h.png"></a>
+<a href="https://discord.gg/invite/gVEyEcyCQw"><img src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3.3.1/assets/cozy/social/discord-plural_64h.png"></a>
 </a>
 
 </a>
@@ -19,15 +19,89 @@
 <a href="https://www.curseforge.com/minecraft/mc-mods/rot"><img alt="curseforge" height="40" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/available/curseforge_46h.png"></a>
 </div>
 
+Early Looks/Peaks Downloads Available In Discord.
 
 </div>
 
 ---
 
-# Master Branch
+# Creator Note
+- **The Rot does NOT begin spreading on its own.** This is why the mod is currently in **Alpha**. To start an infection, enter Creative Mode and right-click a block using the **Cursor Wand**.
+- I am currently just using modrinth/curseforge to act as a way for people to playtest and give feedback!
+- **Requires Fabric API and Fabric Kotlin Language.** I still haven't found a clean badge for Fabric Kotlin. :P
+- **This will almost certainly destroy your world.** Please test in a backup or disposable world.
 
-- Switching over to stonecutter, which makes multi version/loaders alot easier to develop and manage. :3
+- Constructive criticism, feedback, feature requests, suggestions, bug reports, and contributions are always welcome and greatly appreciated!
 
-- Next versioning format will now be `0.1.0-alpha.4`.
+### Less Important Creator Notes
+- I do very much have a mental health battle, so please be patient as I develop the mod. :)
+ 
+- Rainworld o.o
 
-- If your looking for alpha v1.0... it's not here. ;) Will most likely try to find it again and upload as different branch.
+---
+
+# Plan List
+
+### Backend Stuff
+- Switching to stonecutter, which is essentially makes multi versions/loaders easier to manage and develop upon. Which does also mean I plan (atleast for 1.21.1 and higher) to support neoforge as well!
+
+### Cluster System
+- Rot will naturally generate clusters.
+- Each cluster contains a central Heart/Seed.
+- Destroying the Heart stops that cluster from spreading and causes it to harden.
+- The exact implementation is still being worked out, and feedback is always appreciated.
+
+### Intelligent Spreading / Less Noisy Spreading
+- Spread toward light sources, like a little **moth** for example?
+- Prefer player-built structures.
+- In general have spread feel less random and more organic like.
+
+### Rotted Mobs
+- Designed for combat and spreading the infection.
+- Maybe like crawlers that repair dead tissue, or hunters that guard the rot. (I might be getting out of track with rainworld.)
+
+### Rot Cancer
+- The infection mechanic affecting mobs and potentially players.
+- Inspired by Hunter's infection and the Watcher DLC from Rain World.
+- Surviving the infection will be challenging. Have fun trying to cure it!! :33
+
+### More Rot Decorations
+- Rotted leaves.
+- Plants.
+- Flowers.
+- Anything to give it personality or whatevers.
+
+### Mod Compact
+- [1.21.1] Compact for Sable/Create: Aero.
+---
+
+# Latest Version: Alpha 1.0 – QoL Update
+Out for minecraft 1.21.1 & 1.20.1. PLEASE do give feedback!
+
+### Switched to Kotlin
+- Rewrote the mod in Kotlin.
+- Cleaned up old development code and removed leftover debugging and prototype code.
+
+### Enhanced Block Spread System
+- Significantly improved performance.
+- General improvements to spreading behavior.
+
+### Better Textures
+- Converted block textures from **32×32** to **16×16**.
+- Improved texture quality.
+- Looking back, I'm not sure why I chose 32×32. ;w;
+
+### Configuration
+- Added configuration support using **MidnightLib**.
+
+This update doesn't introduce much new gameplay. It focuses on improving the foundation of the mod for future content updates. There will most likely be another similar case, with maybe adding support for neoforge.
+
+---
+
+# Modpack Permission
+
+You are free to include **Rot** in your modpacks. :333
+
+Attribution is appreciated, but not required!
+
+**However, I dont really recommend using the mod in modpacks YET.** It is still in **Alpha**, ofc and major changes, adjustments, and annoying bugs are to be expected. This is after all just a way to have people playtest the mod! Here be dragons!
