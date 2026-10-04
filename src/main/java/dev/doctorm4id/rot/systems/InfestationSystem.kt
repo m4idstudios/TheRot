@@ -79,7 +79,7 @@ object InfestationSystem {
 				.setValue(BlockStateProperties.WATERLOGGED, blockState.getValue(BlockStateProperties.WATERLOGGED))
 
 			else -> {
-				if (M4idBlockUtil.isSolid(pos, level)) cyst.defaultBlockState() else cyst.defaultBlockState()
+				if (blockState.canOcclude()) cyst.defaultBlockState() else return
 			}
 		}
 

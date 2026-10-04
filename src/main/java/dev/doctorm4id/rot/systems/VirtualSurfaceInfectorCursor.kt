@@ -27,7 +27,7 @@ class VirtualSurfaceInfectorCursor(level: ServerLevel) : VirtualCursor(level) {
 
 		if ((state.`is`(Blocks.WATER) || state.`is`(Blocks.BUBBLE_COLUMN))) return true
 
-		if (M4idBlockUtil.isNotSolid(pos, getWorld()) && false) return true
+		if (!state.canOcclude()) return true
 
 		return false
 	}
