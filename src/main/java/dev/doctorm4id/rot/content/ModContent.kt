@@ -32,9 +32,11 @@ object ModContent : M4idAutoRegistrar {
 
 
 
+
 	val BLOOMING_CYST_BLOCK by "blooming_cyst" forBlock { BloomingCystBlock(BlockBehaviour.Properties.of()
 		.sound(SoundType.HONEY_BLOCK)
-		.mapColor(MapColor.COLOR_BLACK)
+		.mapColor(MapColor.COLOR_PURPLE)
+		.lightLevel { 2 }
 	) }
 	val BLOOMING_CYST_ITEM by "blooming_cyst" forItem { BlockItem(BLOOMING_CYST_BLOCK, Item.Properties().rarity(Rarity.RARE) ) }
 
@@ -59,12 +61,14 @@ object ModContent : M4idAutoRegistrar {
 	val ROTTED_LEAVES by "rotted_leaves" forBlock { LeavesBlock(M4idCommonUtil.copyBlockProperties(ROTTED_BLOCK).noOcclusion()) }
 	val ROTTED_LEAVES_ITEM by "rotted_leaves" forItem { BlockItem(ROTTED_LEAVES, Item.Properties()) }
 
-	val ROTTED_GRASS by "rotted_grass" forBlock { RottedFloraBlock(M4idCommonUtil.copyBlockProperties(ROTTED_BLOCK).noCollission().instabreak()) }
+	val ROTTED_GRASS by "rotted_grass" forBlock { RottedFloraBlock(M4idCommonUtil.copyBlockProperties(ROTTED_BLOCK).noCollission().offsetType(BlockBehaviour.OffsetType.XYZ).instabreak()) }
 	val ROTTED_GRASS_ITEM by "rotted_grass" forItem { BlockItem(ROTTED_GRASS, Item.Properties()) }
 
 	val NULL_CYAN by "null_cyan" forBlock { Block(BlockBehaviour.Properties.of() ) }
 
 	val NULL_PINK by "null_pink" forBlock { Block(BlockBehaviour.Properties.of() ) }
+
+
 
 
 	override fun getId(): String = TheRot.MOD_ID
