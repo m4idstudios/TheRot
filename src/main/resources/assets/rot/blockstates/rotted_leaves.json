@@ -1,0 +1,18 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "rot:block/rotted_leaves", "weight": 5
+      },
+      {
+        "model": "rot:block/rotted_leaves", "y": 180, "weight": 5
+      },
+      {
+        "model": "rot:block/rotted_leaves_stiff", "weight": 10
+      },
+      {
+        "model": "rot:block/rotted_leaves_stiff", "y": 180, "weight": 10
+      }
+    ]
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "rot:block/rotted_block", "weight": 5
+      },
+      {
+        "model": "rot:block/rotted_block_mirrored", "weight": 5
+      },
+      {
+        "model": "rot:block/rotted_block", "y": 180, "weight": 5
+      },
+      {
+        "model": "rot:block/rotted_block_mirrored", "y": 180, "weight": 5
+      },
+      {
+        "model": "rot:block/rotted_block_stiff", "weight": 10
+      },
+      {
+        "model": "rot:block/rotted_block_stiff_mirrored", "weight": 10
+      },
+      {
+        "model": "rot:block/rotted_block_stiff", "y": 180, "weight": 10
+      },
+      {
+        "model": "rot:block/rotted_block_stiff_mirrored", "y": 180, "weight": 10
+      }
+    ]
+  }
+}
