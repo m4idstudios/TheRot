@@ -31,9 +31,9 @@ import net.minecraft.world.level.material.MapColor
 
 object ModContent : M4idAutoRegistrar {
 
-	val CURSOR_WAND_ITEM by "cursor_wand" forItem { CursorWand(Item.Properties().rarity(Rarity.EPIC) ) }
+	val CURSOR_WAND_ITEM by "cursor_wand" forItem { CursorWand(Item.Properties().rarity(Rarity.EPIC).stacksTo(1).fireResistant() ) }
 
-	val INFEST_WAND_ITEM by "infest_wand" forItem { InfestWand(Item.Properties().rarity(Rarity.EPIC) ) }
+	val INFEST_WAND_ITEM by "infest_wand" forItem { InfestWand(Item.Properties().rarity(Rarity.EPIC).stacksTo(1).fireResistant() ) }
 
 
 
@@ -42,12 +42,14 @@ object ModContent : M4idAutoRegistrar {
 		.sound(SoundType.HONEY_BLOCK)
 		.mapColor(MapColor.COLOR_PURPLE)
 		.lightLevel { 2 }
+		.strength(1.0f)
 	) }
 	val BLOOMING_CYST_ITEM by "blooming_cyst" forItem { BlockItem(BLOOMING_CYST_BLOCK, Item.Properties() ) }
 
 	val ROTTED_BLOCK by "rotted_block" forBlock { Block(BlockBehaviour.Properties.of()
 		.sound(SoundType.HONEY_BLOCK)
 		.mapColor(MapColor.COLOR_BLACK)
+		.strength(1.5f)
 	) }
 	val ROTTED_BLOCK_ITEM by "rotted_block" forItem { BlockItem(ROTTED_BLOCK, Item.Properties() ) }
 
@@ -63,7 +65,7 @@ object ModContent : M4idAutoRegistrar {
 	val ROTTED_FENCE by "rotted_fence" forBlock { FenceBlock(M4idCommonUtil.copyBlockProperties(ROTTED_BLOCK)) }
 	val ROTTED_FENCE_ITEM by "rotted_fence" forItem { BlockItem(ROTTED_FENCE, Item.Properties()) }
 
-	val ROTTED_LEAVES by "rotted_leaves" forBlock { LeavesBlock(M4idCommonUtil.copyBlockProperties(ROTTED_BLOCK).noOcclusion()) }
+	val ROTTED_LEAVES by "rotted_leaves" forBlock { LeavesBlock(M4idCommonUtil.copyBlockProperties(ROTTED_BLOCK).noOcclusion().strength(0.2f)) }
 	val ROTTED_LEAVES_ITEM by "rotted_leaves" forItem { BlockItem(ROTTED_LEAVES, Item.Properties()) }
 
 	val ROTTED_GRASS by "rotted_grass" forBlock { RottedFloraBlock(M4idCommonUtil.copyBlockProperties(ROTTED_BLOCK).noCollission().offsetType(BlockBehaviour.OffsetType.XYZ).instabreak()) }
