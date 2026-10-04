@@ -2,10 +2,13 @@
   "replace": false,
   "values": [
     "rot:rotted_block",
+    "rot:blooming_cyst",
     "rot:null_cyan",
     "rot:rotted_leaves",
     "rot:rotted_stair",
     "rot:rotted_slab",
-    "rot:rotted_grass"
+    "rot:rotted_grass",
+    "rot:rotted_fence",
+    "rot:rotted_wall"
   ]
 }
