@@ -8,6 +8,14 @@
   "block.rot.rotted_grass": "Rotted Grass",
   "block.rot.rotted_grass_short": "Rotted Short Grass",
 
+  "item.rot.cancer_meds": "Cancer Meds",
+
+  "item.rot.cursor_wand": "Cursor Wand",
+  "tooltip.rot.cursor_wand": "§7Used to spawn infection cursors.",
+
+  "item.rot.infest_wand": "Infest Wand",
+  "tooltip.rot.infest_wand": "§7Testing single block infection, rot-tuah.",
+
   "effect.rot.reprieve": "Reprieve",
   "effect.rot.rotting": "Rot Cancer",
   "effect.rot.reset_rotting_stage_msg1": "§7You bought yourself more time...",
@@ -15,14 +23,8 @@
   "effect.rot.reset_rotting_stage_msg3": "§7The rot begins to slow...",
   "effect.rot.reset_rotting_stage_msg4": "§7It wont be effective forever...",
 
-  "itemGroup.rot.main": "The Rot",
+  "itemGroup.rot": "The Rot",
   "itemGroup.rot.dev": "The Rot: Development",
-
-  "item.rot.cancer_meds": "Cancer Meds",
-
-  "item.rot.dev_cursor_wand": "Cursor Wand",
-  "tooltip.rot.dev_conversion_wand": "§7Testing single block infection stuff, rot-tuah.",
-  "tooltip.rot.dev_cursor_wand": "§7Used to spawn infection cursors.",
 
   "item.rot.coin_of_contribution": "Coin of Contribution ❤",
   "tooltip.rot.coin_of_contribution": "§7A little gift from the value you contributed to this mod,",
