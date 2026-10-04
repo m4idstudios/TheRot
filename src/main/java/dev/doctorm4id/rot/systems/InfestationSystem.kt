@@ -11,9 +11,7 @@ import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
 import net.minecraft.tags.BlockTags
 import net.minecraft.world.level.block.*
-import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
-
 
 object InfestationSystem {
 
@@ -105,18 +103,15 @@ object InfestationSystem {
 			val veinPos = pos.relative(direction)
 			val veinState = level.getBlockState(veinPos)
 
-			if (!veinState.`is`(ModContent.ROTTED_VEIN)) continue
+			if (!veinState.`is`(ModContent.ROTTED_VEIN) && !veinState.`is`(Blocks.SCULK_VEIN)) continue
 
-			val attachedFace = MultifaceBlock.getFaceProperty(direction.opposite)
+			val face = MultifaceBlock.getFaceProperty(direction.opposite)
 
-			if (!veinState.hasProperty(attachedFace)) continue
-			if (!veinState.getValue(attachedFace)) continue
+			if (!veinState.getValue(face)) continue
 
-			val newState = veinState.setValue(attachedFace, false)
+			val newState = veinState.setValue(face, false)
 
-			val hasAnyFace = Direction.entries.any { face -> newState.hasProperty(MultifaceBlock.getFaceProperty(face)) && newState.getValue(MultifaceBlock.getFaceProperty(face)) }
-
-			if (hasAnyFace) {
+			if (Direction.entries.any { newState.getValue(MultifaceBlock.getFaceProperty(it)) }) {
 				level.setBlock(veinPos, newState, Block.UPDATE_ALL)
 			} else {
 				level.setBlock(veinPos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL)
