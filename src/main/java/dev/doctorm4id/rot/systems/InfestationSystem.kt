@@ -83,7 +83,9 @@ object InfestationSystem {
 			}
 		}
 
+		removeVeinsAttachedTo(level, pos)
 		level.setBlockAndUpdate(pos, newState)
+		placeVeinAroundBlock(level, pos)
 	}
 
 	private fun placeFlora(level: ServerLevel, pos: BlockPos) {
@@ -98,64 +100,63 @@ object InfestationSystem {
 		}
 	}
 
+	private fun removeVeinsAttachedTo(level: ServerLevel, pos: BlockPos) {
+		for (direction in Direction.entries) {
+			val veinPos = pos.relative(direction)
+			val veinState = level.getBlockState(veinPos)
 
+			if (!veinState.`is`(ModContent.ROTTED_VEIN)) continue
 
-	// Usefull for later stuff.
+			val attachedFace = MultifaceBlock.getFaceProperty(direction.opposite)
 
-	fun placeVeinAroundBlock(level: ServerLevel, pos: BlockPos) {
-		for (neighbor: BlockPos? in M4idBlockUtil.getNeighborsCube(pos, true)) {
-			placeVeinAtBlock(level, neighbor!!)
+			if (!veinState.hasProperty(attachedFace)) continue
+			if (!veinState.getValue(attachedFace)) continue
+
+			val newState = veinState.setValue(attachedFace, false)
+
+			val hasAnyFace = Direction.entries.any { face -> newState.hasProperty(MultifaceBlock.getFaceProperty(face)) && newState.getValue(MultifaceBlock.getFaceProperty(face)) }
+
+			if (hasAnyFace) {
+				level.setBlock(veinPos, newState, Block.UPDATE_ALL)
+			} else {
+				level.setBlock(veinPos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL)
+			}
 		}
 	}
 
-	private fun placeVeinAtBlock(level: ServerLevel, pos: BlockPos) {
-		var validPlacement = false;
-		val blockState = level.getBlockState(pos)
+	fun placeVeinAroundBlock(level: ServerLevel, pos: BlockPos) {
+		for (direction in Direction.entries) {
+			val adjacentPos = pos.relative(direction)
+			val adjacentState = level.getBlockState(adjacentPos)
 
-		if (!M4idBlockUtil.isAir(blockState)) return
+			if (M4idBlockUtil.isAir(adjacentState)) continue
+			if (adjacentState.`is`(ModContent.BlockTags.ROT_FAMILY)) continue
 
-		val vein = Blocks.SCULK_VEIN
-		val north = level.getBlockState(pos.north())
-		val south = level.getBlockState(pos.south())
-		val east = level.getBlockState(pos.east())
-		val west = level.getBlockState(pos.west())
-		val up = level.getBlockState(pos.above())
-		val down = level.getBlockState(pos.below())
+			placeVeinsOnBlock(level, adjacentPos, direction)
+		}
+	}
 
-		var newBlockState = vein.defaultBlockState()
+	private fun placeVeinsOnBlock(level: ServerLevel, blockPos: BlockPos, sourceDirection: Direction) {
+		for (face in Direction.entries) {
+			if (face == sourceDirection) continue
 
-		if (north.isFaceSturdy(level, pos, Direction.SOUTH)) {
-			validPlacement = true
-			val property = MultifaceBlock.getFaceProperty(Direction.NORTH)
-			newBlockState = newBlockState.setValue(property, true)
-		}
-		if (east.isFaceSturdy(level, pos, Direction.WEST)) {
-			validPlacement = true
-			val property = MultifaceBlock.getFaceProperty(Direction.EAST)
-			newBlockState = newBlockState.setValue(property, true)
-		}
-		if (south.isFaceSturdy(level, pos, Direction.NORTH)) {
-			validPlacement = true
-			val property = MultifaceBlock.getFaceProperty(Direction.SOUTH)
-			newBlockState = newBlockState.setValue(property, true)
-		}
-		if (west.isFaceSturdy(level, pos, Direction.EAST)) {
-			validPlacement = true
-			val property = MultifaceBlock.getFaceProperty(Direction.WEST)
-			newBlockState = newBlockState.setValue(property, true)
-		}
-		if (up.isFaceSturdy(level, pos, Direction.DOWN)) {
-			validPlacement = true
-			val property = MultifaceBlock.getFaceProperty(Direction.UP)
-			newBlockState = newBlockState.setValue(property, true)
-		}
-		if (down.isFaceSturdy(level, pos, Direction.UP)) {
-			validPlacement = true
-			val property = MultifaceBlock.getFaceProperty(Direction.DOWN)
-			newBlockState = newBlockState.setValue(property, true)
-		}
-		if (validPlacement) {
-			level.setBlockAndUpdate(pos, newBlockState)
+			val supportState = level.getBlockState(blockPos)
+			if (!supportState.isFaceSturdy(level, blockPos, face)) continue
+
+			val veinPos = blockPos.relative(face)
+			val veinState = level.getBlockState(veinPos)
+
+			if (!M4idBlockUtil.isAir(veinState) && !veinState.`is`(ModContent.ROTTED_VEIN)) continue
+
+			val property = MultifaceBlock.getFaceProperty(face.opposite)
+
+			val newState = if (veinState.`is`(ModContent.ROTTED_VEIN)) {
+				veinState.setValue(property, true)
+			} else {
+				ModContent.ROTTED_VEIN.defaultBlockState().setValue(property, true)
+			}
+
+			level.setBlockAndUpdate(veinPos, newState)
 		}
 	}
 }

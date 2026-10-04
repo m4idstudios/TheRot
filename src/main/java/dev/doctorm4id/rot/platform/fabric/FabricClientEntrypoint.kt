@@ -22,6 +22,11 @@ class FabricClientEntrypoint : ClientModInitializer {
 			ModContent.ROTTED_GRASS,
 			RenderType.cutout()
 		)
+
+		BlockRenderLayerMap.INSTANCE.putBlock(
+			ModContent.ROTTED_VEIN,
+			RenderType.cutout()
+		)
 	}
 }
 

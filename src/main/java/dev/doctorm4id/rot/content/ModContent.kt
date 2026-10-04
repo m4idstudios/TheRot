@@ -6,6 +6,7 @@ import dev.doctorm4id.m4id.registration.M4idRegistrar
 import dev.doctorm4id.m4id.util.M4idCommonUtil
 import dev.doctorm4id.rot.TheRot
 import dev.doctorm4id.rot.content.block.BloomingCystBlock
+import dev.doctorm4id.rot.content.block.RotVeinBlock
 import dev.doctorm4id.rot.content.block.RottedFloraBlock
 import dev.doctorm4id.rot.content.item.CursorWand
 import dev.doctorm4id.rot.content.item.InfestWand
@@ -75,6 +76,10 @@ object ModContent : M4idAutoRegistrar {
 
 	val NULL_PINK by "null_pink" forBlock { Block(BlockBehaviour.Properties.of() ) }
 
+	val ROTTED_VEIN by "rotted_vein" forBlock { RotVeinBlock(BlockBehaviour.Properties.of().noCollission().instabreak().sound(SoundType.SCULK_VEIN) ) }
+	val ROTTED_VEIN_ITEM by "rotte_vein" forItem { BlockItem(ROTTED_VEIN, Item.Properties()) }
+
+
 
 
 	val ROT_TAB = M4idRegistrar.register(
@@ -97,6 +102,7 @@ object ModContent : M4idAutoRegistrar {
 					output.accept(ROTTED_FENCE_ITEM)
 					output.accept(ROTTED_LEAVES_ITEM)
 					output.accept(ROTTED_GRASS_ITEM)
+					output.accept(ROTTED_VEIN_ITEM)
 				}
 				.build()
 		}

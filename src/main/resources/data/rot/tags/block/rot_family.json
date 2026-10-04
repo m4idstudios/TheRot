@@ -9,6 +9,7 @@
     "rot:rotted_slab",
     "rot:rotted_grass",
     "rot:rotted_fence",
-    "rot:rotted_wall"
+    "rot:rotted_wall",
+    "rot:rotted_vein"
   ]
 }
