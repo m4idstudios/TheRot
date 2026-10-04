@@ -9,6 +9,7 @@ import net.minecraft.core.particles.SculkChargeParticleOptions
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
+import net.minecraft.tags.BlockTags
 import net.minecraft.world.level.block.*
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
@@ -40,9 +41,8 @@ object InfestationSystem {
 			4, 0.1, 0.1, 0.1, 0.2
 		)
 
-		infestBlock(level, pos)
-
 		placeFlora(level, pos)
+		infestBlock(level, pos)
 	}
 
 	private fun infestBlock(level: ServerLevel, pos: BlockPos) {
@@ -89,9 +89,12 @@ object InfestationSystem {
 	private fun placeFlora(level: ServerLevel, pos: BlockPos) {
 		val flora = randomFlora.getRandomEntry() ?: return
 		val offsetPos = pos.above()
+		val blockAbove = level.getBlockState(offsetPos)
 
 		if (level.getBlockState(offsetPos).block.defaultBlockState().isAir && !flora.defaultBlockState().isAir && M4idBlockUtil.isSolid(pos, level)) {
 			level.setBlockAndUpdate(offsetPos, flora.defaultBlockState())
+		} else if (flora.defaultBlockState().isAir && blockAbove.`is`(BlockTags.FLOWERS) || blockAbove.block is BushBlock || blockAbove.`is`(BlockTags.CROPS)) {
+			level.destroyBlock(offsetPos, false)
 		}
 	}
 
