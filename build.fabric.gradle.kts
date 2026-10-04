@@ -107,5 +107,5 @@ dependencies {
 	// modLocalRuntime("com.terraformersmc:modmenu:${prop("deps.modmenu")}")
 
 	//modImplementation(files("libs/m4id-0.1.0-alpha.1-fabric+1.21.1-SNAPSHOT.jar"))
-	modImplementation("com.github.DoctorM4id.M4id:m4id-1.21.1-fabric:0.1.0-alpha.2")
+	modImplementation("com.github.DoctorM4id.M4id:1.21.1-fabric:0.1.0-alpha.4")
 }
