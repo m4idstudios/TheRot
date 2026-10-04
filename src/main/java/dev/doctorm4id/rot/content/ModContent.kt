@@ -2,17 +2,22 @@ package dev.doctorm4id.rot.content
 
 import dev.doctorm4id.m4id.ext.ResourceLocation
 import dev.doctorm4id.m4id.registration.M4idAutoRegistrar
+import dev.doctorm4id.m4id.registration.M4idRegistrar
 import dev.doctorm4id.m4id.util.M4idCommonUtil
 import dev.doctorm4id.rot.TheRot
 import dev.doctorm4id.rot.content.block.BloomingCystBlock
 import dev.doctorm4id.rot.content.block.RottedFloraBlock
 import dev.doctorm4id.rot.content.item.CursorWand
 import dev.doctorm4id.rot.content.item.InfestWand
+import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.core.registries.Registries
+import net.minecraft.network.chat.Component
 import net.minecraft.tags.TagKey
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.item.BlockItem
+import net.minecraft.world.item.CreativeModeTab
 import net.minecraft.world.item.Item
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Rarity
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.FenceBlock
@@ -38,13 +43,13 @@ object ModContent : M4idAutoRegistrar {
 		.mapColor(MapColor.COLOR_PURPLE)
 		.lightLevel { 2 }
 	) }
-	val BLOOMING_CYST_ITEM by "blooming_cyst" forItem { BlockItem(BLOOMING_CYST_BLOCK, Item.Properties().rarity(Rarity.RARE) ) }
+	val BLOOMING_CYST_ITEM by "blooming_cyst" forItem { BlockItem(BLOOMING_CYST_BLOCK, Item.Properties() ) }
 
 	val ROTTED_BLOCK by "rotted_block" forBlock { Block(BlockBehaviour.Properties.of()
 		.sound(SoundType.HONEY_BLOCK)
 		.mapColor(MapColor.COLOR_BLACK)
 	) }
-	val ROTTED_BLOCK_ITEM by "rotted_block" forItem { BlockItem(ROTTED_BLOCK, Item.Properties().rarity(Rarity.UNCOMMON) ) }
+	val ROTTED_BLOCK_ITEM by "rotted_block" forItem { BlockItem(ROTTED_BLOCK, Item.Properties() ) }
 
 	val ROTTED_SLAB by "rotted_slab" forBlock { SlabBlock(M4idCommonUtil.copyBlockProperties(ROTTED_BLOCK)) }
 	val ROTTED_SLAB_ITEM by "rotted_slab" forItem { BlockItem(ROTTED_SLAB, Item.Properties()) }
@@ -70,6 +75,30 @@ object ModContent : M4idAutoRegistrar {
 
 
 
+	val ROT_TAB = M4idRegistrar.register(
+		this,
+		BuiltInRegistries.CREATIVE_MODE_TAB,
+		"rot",
+		lazy {
+			CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)
+				.title(Component.translatable("itemGroup.rot"))
+				.icon { ItemStack(BLOOMING_CYST_ITEM) }
+				.displayItems { _, output ->
+					output.accept(CURSOR_WAND_ITEM)
+					output.accept(INFEST_WAND_ITEM)
+
+					output.accept(BLOOMING_CYST_ITEM)
+					output.accept(ROTTED_BLOCK_ITEM)
+					output.accept(ROTTED_SLAB_ITEM)
+					output.accept(ROTTED_STAIR_ITEM)
+					output.accept(ROTTED_WALL_ITEM)
+					output.accept(ROTTED_FENCE_ITEM)
+					output.accept(ROTTED_LEAVES_ITEM)
+					output.accept(ROTTED_GRASS_ITEM)
+				}
+				.build()
+		}
+	)
 
 	override fun getId(): String = TheRot.MOD_ID
 
