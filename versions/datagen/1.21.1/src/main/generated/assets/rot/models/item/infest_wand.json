@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "rot:item/infesst_wand"
+    "layer0": "rot:item/infest_wand"
   }
 }
