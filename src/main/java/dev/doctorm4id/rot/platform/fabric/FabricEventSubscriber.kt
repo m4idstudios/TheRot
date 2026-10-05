@@ -4,7 +4,9 @@ package dev.doctorm4id.rot.platform.fabric
 
 import dev.doctorm4id.rot.event.ExampleEventHandler
 import dev.doctorm4id.rot.systems.CursorManager
+import dev.doctorm4id.rot.systems.InfestationSystem
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.damagesource.DamageSource
@@ -21,8 +23,12 @@ class FabricEventSubscriber {
 		})
 		//?}
 
+		ServerLifecycleEvents.SERVER_STOPPING.register {
+			CursorManager.clear()
+		}
+
 		ServerTickEvents.START_SERVER_TICK.register(ServerTickEvents.StartTick { server ->
-           CursorManager.tick()
+			CursorManager.tick()
         })
 	}
 }
