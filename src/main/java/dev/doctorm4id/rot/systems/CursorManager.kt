@@ -22,6 +22,12 @@ object CursorManager {
 		virtualCursor.insetCursor(entity)
 	}
 
+	fun clear() {
+		virtualCursor.clear()
+		virtualCursorIndex = 0
+		cleanCooldown = 0
+	}
+
 	fun tick() {
 		if (list.isEmpty()) return
 
