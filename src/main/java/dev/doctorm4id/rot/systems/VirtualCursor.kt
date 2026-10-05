@@ -11,6 +11,7 @@ import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.state.BlockState
 import java.util.ArrayDeque
 import java.util.UUID
+import kotlin.random.Random
 
 open class VirtualCursor(var level: ServerLevel) : ICursor {
 
@@ -157,6 +158,8 @@ open class VirtualCursor(var level: ServerLevel) : ICursor {
 			} else if (distSq.toLong() == minDistanceSq) {
 				bestPositions.add(neighbor)
 			}
+
+			bestPositions.shuffle(Random)
 		}
 
 		if (bestPositions.isEmpty()) {
