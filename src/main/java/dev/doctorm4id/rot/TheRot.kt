@@ -7,10 +7,7 @@ import org.slf4j.LoggerFactory
 
 //? fabric {
 import dev.doctorm4id.rot.platform.fabric.FabricPlatform
-import net.minecraft.client.renderer.RenderType
-import net.minecraft.core.registries.Registries
-import net.minecraft.tags.TagKey
-import net.minecraft.world.level.block.Block
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents
 //? }
 
 //? neoforge {
