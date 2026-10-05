@@ -5,13 +5,14 @@ import dev.doctorm4id.m4id.util.M4idTickUtil
 import dev.doctorm4id.rot.content.ModContent
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet
 import net.minecraft.core.BlockPos
+import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.state.BlockState
 import java.util.ArrayDeque
 import java.util.UUID
 
-open class VirtualCursor(var level: Level) : ICursor {
+open class VirtualCursor(var level: ServerLevel) : ICursor {
 
 	companion object {
 		private val NEIGHBOR_OFFSETS: Array<BlockPos> = buildList {
@@ -130,44 +131,50 @@ open class VirtualCursor(var level: Level) : ICursor {
 	private fun exploreTick() {
 		val currentTarget = target
 
-		var closet: BlockPos = BlockPos.ZERO
-		var minDistanceSq = Long.MAX_VALUE
-
-		if (currentTarget == BlockPos.ZERO || currentTarget == null) {
+		if (currentTarget == null || currentTarget == BlockPos.ZERO) {
 			startSearch()
 			return
 		}
 
+		var minDistanceSq = Long.MAX_VALUE
+		val bestPositions = ArrayList<BlockPos>()
+
 		for (offset in NEIGHBOR_OFFSETS) {
 			val neighbor = pos.offset(offset)
-			if (!isObstructed(getWorld().getBlockState(neighbor), neighbor)) {
-				val distSq = M4idBlockUtil.getBlockDistanceSquared(neighbor, currentTarget)
 
-				if (distSq < minDistanceSq) {
-					minDistanceSq = distSq.toLong()
-					closet = neighbor
-				}
+			if (isObstructed(getWorld().getBlockState(neighbor), neighbor))
+				continue
+
+			val distSq = M4idBlockUtil.getBlockDistanceSquared(
+				neighbor,
+				currentTarget
+			)
+
+			if (distSq < minDistanceSq) {
+				minDistanceSq = distSq.toLong()
+				bestPositions.clear()
+				bestPositions.add(neighbor)
+			} else if (distSq.toLong() == minDistanceSq) {
+				bestPositions.add(neighbor)
 			}
 		}
 
-		moveTo(closet.x, closet.y, closet.z)
+		if (bestPositions.isEmpty()) {
+			startSearch()
+			return
+		}
 
-		val targetCheck = isTarget(level, pos)
-		val obstructedCheck = isObstructed(getWorld().getBlockState(pos), pos)
+		val next = bestPositions[
+			getWorld().random.nextInt(bestPositions.size)
+		]
 
-		if (targetCheck && !obstructedCheck) {
+		moveTo(next.x, next.y, next.z)
+
+		if (isTarget(level, pos) && !isObstructed(getWorld().getBlockState(pos), pos)) {
 			changeBlock(pos)
 			startSearch()
-
-/*			if (!level.getBlockState(pos).`is`(ModContent.BlockTags.ROT_FAMILY)) {
-				getWorld().setBlock(pos, Blocks.GREEN_STAINED_GLASS.defaultBlockState(), 3)
-			}*/
 		} else {
-			visitedPositions.add(closet.asLong())
-
-/*			if (!level.getBlockState(pos).`is`(ModContent.BlockTags.ROT_FAMILY)) {
-				getWorld().setBlock(pos, Blocks.RED_STAINED_GLASS.defaultBlockState(), 3)
-			}*/
+			visitedPositions.add(next.asLong())
 		}
 	}
 
