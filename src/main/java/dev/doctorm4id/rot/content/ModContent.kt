@@ -8,6 +8,7 @@ import dev.doctorm4id.rot.TheRot
 import dev.doctorm4id.rot.content.block.BloomingCystBlock
 import dev.doctorm4id.rot.content.block.RotVeinBlock
 import dev.doctorm4id.rot.content.block.RottedFloraBlock
+import dev.doctorm4id.rot.content.item.ChunkWand
 import dev.doctorm4id.rot.content.item.CursorWand
 import dev.doctorm4id.rot.content.item.InfestWand
 import net.minecraft.core.registries.BuiltInRegistries
@@ -36,13 +37,15 @@ object ModContent : M4idAutoRegistrar {
 
 	val INFEST_WAND_ITEM by "infest_wand" forItem { InfestWand(Item.Properties().rarity(Rarity.EPIC).stacksTo(1).fireResistant() ) }
 
+	val CHUNK_WAND_ITEM by "chunk_wand" forItem { ChunkWand(Item.Properties().rarity(Rarity.EPIC).stacksTo(1).fireResistant() ) }
+
 
 
 
 	val BLOOMING_CYST_BLOCK by "blooming_cyst" forBlock { BloomingCystBlock(BlockBehaviour.Properties.of()
 		.sound(SoundType.HONEY_BLOCK)
 		.mapColor(MapColor.COLOR_PURPLE)
-		.lightLevel { 2 }
+		//.lightLevel { 2 }
 		.strength(1.0f)
 	) }
 	val BLOOMING_CYST_ITEM by "blooming_cyst" forItem { BlockItem(BLOOMING_CYST_BLOCK, Item.Properties() ) }
@@ -93,6 +96,7 @@ object ModContent : M4idAutoRegistrar {
 				.displayItems { _, output ->
 					output.accept(CURSOR_WAND_ITEM)
 					output.accept(INFEST_WAND_ITEM)
+					output.accept(CHUNK_WAND_ITEM)
 
 					output.accept(BLOOMING_CYST_ITEM)
 					output.accept(ROTTED_BLOCK_ITEM)

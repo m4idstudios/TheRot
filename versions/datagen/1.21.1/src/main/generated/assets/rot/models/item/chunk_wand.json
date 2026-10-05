@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "rot:block/rotted_vein"
+    "layer0": "rot:item/chunk_wand"
   }
 }

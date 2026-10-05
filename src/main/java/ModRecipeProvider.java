@@ -19,6 +19,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class ModRecipeProvider extends FabricRecipeProvider {
 
+
 	private final CompletableFuture<HolderLookup.Provider> registriesFuture;
 
 	public ModRecipeProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {

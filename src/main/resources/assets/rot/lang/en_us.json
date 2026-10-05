@@ -16,6 +16,9 @@
   "item.rot.infest_wand": "Infest Wand",
   "tooltip.rot.infest_wand": "§7Testing single block infection, rot-tuah.",
 
+  "item.rot.chunk_wand": "Chunk Wand",
+  "tooltip.rot.chunk_wand": "§7Infecting chunks. EXPERIMENTAL",
+
   "effect.rot.reprieve": "Reprieve",
   "effect.rot.rotting": "Rot Cancer",
   "effect.rot.reset_rotting_stage_msg1": "§7You bought yourself more time...",

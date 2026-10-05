@@ -13,14 +13,14 @@ import net.minecraft.world.item.TooltipFlag
 import net.minecraft.world.item.context.UseOnContext
 import net.minecraft.world.level.ChunkPos
 
-class CursorWand(props: Properties) : Item( props.stacksTo(1).fireResistant() ) {
+class ChunkWand(props: Properties) : Item( props.stacksTo(1).fireResistant() ) {
 
 	override fun useOn(ctx: UseOnContext): InteractionResult {
 		val level = ctx.level
 		if (level is ServerLevel) {
 			val spawnPos: BlockPos = ctx.clickedPos.relative(ctx.clickedFace)
 
-			CursorManager.createSurfaceInfectorVirtualCursor(level, spawnPos)
+			CursorManager.addVirtualCursor(VirtualChunkCursor(level, ChunkPos(spawnPos)))
 
 			return InteractionResult.SUCCESS
 		}
@@ -36,6 +36,6 @@ class CursorWand(props: Properties) : Item( props.stacksTo(1).fireResistant() ) 
 	) {
 		val tooltip = list as MutableList<Component>
 
-		tooltip.add(Component.translatable("tooltip.rot.cursor_wand"))
+		tooltip.add(Component.translatable("tooltip.rot.chunk_wand"))
 	}
 }

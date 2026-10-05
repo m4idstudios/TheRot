@@ -56,7 +56,7 @@ open class VirtualCursor(var level: ServerLevel) : ICursor {
 	}
 
 	private fun hasExpired(): Boolean {
-		return (getWorld().gameTime - creationTime) > M4idTickUtil.convertMinutesToTicks(2)
+		return (getWorld().gameTime - creationTime) > M4idTickUtil.convertMinutesToTicks(1)
 	}
 
 	override fun tick() {

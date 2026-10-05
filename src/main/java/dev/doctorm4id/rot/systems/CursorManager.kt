@@ -31,7 +31,7 @@ object CursorManager {
 	fun tick() {
 		if (list.isEmpty()) return
 
-		val maxCursors = 128
+		val maxCursors = 1128
 
 		if (cleanCooldown-- <= 0) {
 			virtualCursor.clean()
@@ -45,6 +45,8 @@ object CursorManager {
 		for (list in toProcess) {
 			list.tick()
 		}
+
+		//TheRot.LOGGER.info("Cursor Size: ${toProcess.size}")
 	}
 }
 

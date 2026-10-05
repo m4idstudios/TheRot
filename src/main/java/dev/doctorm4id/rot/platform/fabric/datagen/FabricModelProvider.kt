@@ -3,6 +3,7 @@ package dev.doctorm4id.rot.platform.fabric.datagen
 //? fabric {
 
 import dev.doctorm4id.rot.TheRot
+import dev.doctorm4id.rot.content.ModContent
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
 import net.minecraft.data.models.BlockModelGenerators
@@ -13,26 +14,18 @@ class FabricModelProvider(output: FabricDataOutput) : FabricModelProvider(output
 
 	override fun generateBlockStateModels(blockStateModelGenerator: BlockModelGenerators?) {
 
-/*		blockStateModelGenerator?.createTrivialCube(ModRegistry.ROTTED_LEAVES())
-		blockStateModelGenerator?.family(ModRegistry.ROTTED_BLOCK())
-			?.fence(ModRegistry.ROTTED_FENCE())
-			?.slab(ModRegistry.ROTTED_SLAB())
-			?.stairs(ModRegistry.ROTTED_STAIR())
-			?.wall(ModRegistry.ROTTED_WALL())
-
-		blockStateModelGenerator?.createTrivialCube(ModRegistry.NULL_CYAN())
-		blockStateModelGenerator?.createTrivialCube(ModRegistry.NULL_GREEN())
-		blockStateModelGenerator?.createTrivialCube(ModRegistry.NULL_RED())
-		blockStateModelGenerator?.createTrivialCube(ModRegistry.NULL_WHITE())
-		blockStateModelGenerator?.createTrivialCube(ModRegistry.NULL_PINK())
-		blockStateModelGenerator?.createTrivialCube(ModRegistry.NULL_YELLOW())
-		blockStateModelGenerator?.createTrivialCube(ModRegistry.NULL_BLUE())*/
-
+		blockStateModelGenerator?.createTrivialCube(ModContent.ROTTED_LEAVES)
+		blockStateModelGenerator?.family(ModContent.ROTTED_BLOCK)
+			?.fence(ModContent.ROTTED_FENCE)
+			?.slab(ModContent.ROTTED_SLAB)
+			?.stairs(ModContent.ROTTED_STAIR)
+			?.wall(ModContent.ROTTED_WALL)
 	}
 
 	override fun generateItemModels(itemModelGenerator: ItemModelGenerators?) {
-/*		itemModelGenerator?.generateFlatItem(ModRegistry.CURSOR_WAND(), ModelTemplates.FLAT_ITEM)
-		itemModelGenerator?.generateFlatItem(ModRegistry.INFESST_WAND(), ModelTemplates.FLAT_ITEM)*/
+		itemModelGenerator?.generateFlatItem(ModContent.CURSOR_WAND_ITEM, ModelTemplates.FLAT_ITEM)
+		itemModelGenerator?.generateFlatItem(ModContent.CHUNK_WAND_ITEM, ModelTemplates.FLAT_ITEM)
+		itemModelGenerator?.generateFlatItem(ModContent.INFEST_WAND_ITEM, ModelTemplates.FLAT_ITEM)
 	}
 
 	override fun getName(): String {

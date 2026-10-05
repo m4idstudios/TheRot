@@ -38,10 +38,12 @@ class VirtualSurfaceInfectorCursor(level: ServerLevel) : VirtualCursor(level) {
 		val rotNeighbors = neighbors.count { level.getBlockState(it).`is`(ModContent.BlockTags.ROT_FAMILY) }
 		val exposed = if (M4idBlockUtil.isExposedToAir(pos, level)) 1.0 else 0.15
 		val wetBonus = if (level.getFluidState(pos).isSource) 0.2 else 0.0
-		val distance = if (M4idBlockUtil.getBlockDistanceSquared(origin, pos) < 10 * 10) 1.0 else 0.5
+		//val distance = if (M4idBlockUtil.getBlockDistanceSquared(origin, pos) < 10 * 10) 1.0 else 0.5
 
-		val base = 0.15
-		val chance = (((base + (rotNeighbors * 0.3).coerceIn(0.0, 1.0)) * exposed) * distance)
+		val ratio = (rotNeighbors / 6.0).coerceIn(0.0, 1.0)
+		val strength = ratio * ratio * ratio
+
+		val chance = (0.1 + (0.95 * strength) * exposed)
 
 		val willInfest = level.random.nextDouble() < chance.coerceIn(0.0, 0.95)
 

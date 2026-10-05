@@ -39,8 +39,8 @@ object InfestationSystem {
 			4, 0.1, 0.1, 0.1, 0.2
 		)
 
-		placeFlora(level, pos)
 		infestBlock(level, pos)
+		placeFlora(level, pos)
 	}
 
 	private fun infestBlock(level: ServerLevel, pos: BlockPos) {

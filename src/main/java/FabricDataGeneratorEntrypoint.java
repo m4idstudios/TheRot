@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 
 public class FabricDataGeneratorEntrypoint implements DataGeneratorEntrypoint {
 
+
 	@Override
 	public void onInitializeDataGenerator(FabricDataGenerator generator) {
 		//? != 1.20.1 {
