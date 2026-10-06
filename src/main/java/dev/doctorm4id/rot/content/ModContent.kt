@@ -47,6 +47,7 @@ object ModContent : M4idAutoRegistrar {
 		.mapColor(MapColor.COLOR_PURPLE)
 		//.lightLevel { 2 }
 		.strength(1.0f)
+		.randomTicks()
 	) }
 	val BLOOMING_CYST_ITEM by "blooming_cyst" forItem { BlockItem(BLOOMING_CYST_BLOCK, Item.Properties() ) }
 
