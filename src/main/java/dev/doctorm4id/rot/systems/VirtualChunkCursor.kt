@@ -10,12 +10,11 @@ import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.chunk.LevelChunk
 import kotlin.random.Random
 
-class VirtualChunkCursor(level: ServerLevel, chunkPos: ChunkPos) : VirtualCursor(level) {
+class VirtualChunkCursor(level: ServerLevel, private var chunkPos: ChunkPos) : VirtualCursor(level) {
 	private companion object {
 		const val BLOCKS_PER_TICK = 256
 	}
 
-	private var chunkPos = chunkPos
 	private var chunk: LevelChunk = level.getChunk(chunkPos.x, chunkPos.z)
 
 	private val minX = 0
@@ -74,11 +73,10 @@ class VirtualChunkCursor(level: ServerLevel, chunkPos: ChunkPos) : VirtualCursor
 
 			//val pos = BlockPos(x, y, z)
 
-			val sectionIndex = level.getSectionIndex(y)
-			val section = chunk.getSection(sectionIndex)
+			val section = chunk.getSection(level.getSectionIndex(y))
 
 			if (section.hasOnlyAir()) {
-				y += 16
+				y = ((y shr 4) + 1) shl 4
 				return@repeat
 			}
 
@@ -95,13 +93,16 @@ class VirtualChunkCursor(level: ServerLevel, chunkPos: ChunkPos) : VirtualCursor
 			} else if (state.isAir) {
 				level.setBlockAndUpdate(mutablePos, Blocks.GLASS.defaultBlockState())
 			}*/
-			level.setBlockAndUpdate(mutablePos, Blocks.AIR.defaultBlockState())
 
-/*			if (Random.nextFloat() < 0.15f && canInfect(pos)) {
-				InfestationSystem.infestPosition(level, pos)
-				CursorManager.createSurfaceInfectorVirtualCursor(level, pos)
-			} else {
-				level.setBlockAndUpdate(pos, Blocks.BEDROCK.defaultBlockState())
+			//level.setBlockAndUpdate(mutablePos, Blocks.AIR.defaultBlockState())
+
+			//InfestationSystem.infestPosition(level, mutablePos)
+
+			if (Random.nextFloat() < 0.3f) {
+				InfestationSystem.infestPosition(level, mutablePos)
+				//CursorManager.createSurfaceInfectorVirtualCursor(level, mutablePos)
+			}/* else {
+				level.setBlockAndUpdate(mutablePos, Blocks.BEDROCK.defaultBlockState())
 			}*/
 
 			advance()
@@ -160,7 +161,7 @@ class VirtualChunkCursor(level: ServerLevel, chunkPos: ChunkPos) : VirtualCursor
 				VirtualChunkCursor(level, next)
 			)*/
 
-			TheRot.LOGGER.info(next.toString())
+			//TheRot.LOGGER.info(next.toString())
 
 			chunkPos = next
 			chunk = level.getChunk(next.x, next.z)
