@@ -93,12 +93,14 @@ Attribution is appreciated, but not required!
 
 **However, I dont really recommend using the mod in modpacks YET.** It is still in **Alpha**, ofc and major changes, adjustments, and annoying bugs are to be expected. This is after all just a way to have people playtest the mod! Here be dragons!
 
+---
+
 <div align="center">
 
-**A M4id Studios Project.**
+**By M4id Studios.**
 
 </div>
 
 ---
 
-![M4id Studios](https://cdn.modrinth.com/data/cached_images/771fb060cc532c2dab6bbb6d8ef770eeb3276232_0.webp)
+![m4idstudios.com](https://cdn.modrinth.com/data/cached_images/771fb060cc532c2dab6bbb6d8ef770eeb3276232_0.webp)
