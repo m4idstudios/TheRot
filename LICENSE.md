@@ -42,4 +42,4 @@ You **may not** redistribute, modify, or reuse these assets in any public forks,
 
 For licensing inquiries, asset permissions, or official support, please reach out via:
 * **Discord:** doctorm4id
-* **Community:** https://discord.stoatdev.team
+* **Community:** https://discord.m4idstudios.com
