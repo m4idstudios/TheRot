@@ -15,7 +15,7 @@ These are the versions currently supported or planned:
 | 26.1.1 - 26.1.2  | Skipped       | -                | -                          |                                                                              |
 | 26.1             | Planned       | Neoforge, Fabric | -                          |                                                                              |
 | 1.21.2 - 1.21.11 | Skipped       | -                | -                          |                                                                              |
-| 1.21.1           | Supported     | Neoforge, Fabric | 0.1.0-alpha.2              |                                                                              |
+| 1.21.1           | Supported     | Neoforge, Fabric | 0.1.0-alpha.2              | Not out on modrinth.                                                         |
 | 1.20.2 - 1.20.10 | Skipped       | -                | -                          |                                                                              |
 | 1.20.1           | Legacy        | Fabric           | 1.0+1.20.1-fabric (legacy) | Will release latest version when the M4id library gets backported to 1.20.1. |
 | < 1.20.1         | Won't Support | -                | -                          |                                                                              |
