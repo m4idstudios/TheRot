@@ -5,13 +5,6 @@ import net.minecraft.resources.ResourceLocation
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
-//? fabric {
-//? }
-
-//? neoforge {
-/*import dev.doctorm4id.rot.platform.neoforge.NeoforgePlatform
-*///? }
-
 @SuppressWarnings("LoggingSimilarMessage")
 class TheRot {
 
