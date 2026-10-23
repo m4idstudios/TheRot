@@ -1,13 +1,12 @@
 package dev.doctorm4id.rot.systems
 
-import dev.doctorm4id.m4id.util.M4idBlockUtil
+import dev.doctorm4id.m4id.ext.distanceToBlockSquared
 import dev.doctorm4id.m4id.util.M4idTickUtil
 import dev.doctorm4id.rot.content.ModContent
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet
 import net.minecraft.core.BlockPos
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.level.Level
-import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.state.BlockState
 import java.util.ArrayDeque
 import java.util.UUID
@@ -146,10 +145,7 @@ open class VirtualCursor(var level: ServerLevel) : ICursor {
 			if (isObstructed(getWorld().getBlockState(neighbor), neighbor))
 				continue
 
-			val distSq = M4idBlockUtil.getBlockDistanceSquared(
-				neighbor,
-				currentTarget
-			)
+			val distSq = neighbor.distanceToBlockSquared(currentTarget)
 
 			if (distSq < minDistanceSq) {
 				minDistanceSq = distSq.toLong()

@@ -11,10 +11,10 @@
       {"model": "rot:block/blooming_cyst_2_mirrored", "weight": 5},
       {"model": "rot:block/blooming_cyst_2_mirrored", "y": 180, "weight": 5},
 
-      {"model": "rot:block/blooming_cyst_3", "weight": 2},
-      {"model": "rot:block/blooming_cyst_3", "y": 180, "weight": 2},
-      {"model": "rot:block/blooming_cyst_3_mirrored", "weight": 2},
-      {"model": "rot:block/blooming_cyst_3_mirrored", "y": 180, "weight": 2}
+      {"model": "rot:block/blooming_cyst_4", "weight": 2},
+      {"model": "rot:block/blooming_cyst_4", "y": 180, "weight": 2},
+      {"model": "rot:block/blooming_cyst_4_mirrored", "weight": 2},
+      {"model": "rot:block/blooming_cyst_4_mirrored", "y": 180, "weight": 2}
     ]
   }
 }

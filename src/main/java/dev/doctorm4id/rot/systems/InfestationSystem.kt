@@ -1,6 +1,6 @@
 package dev.doctorm4id.rot.systems
 
-import dev.doctorm4id.m4id.util.M4idBlockUtil
+import dev.doctorm4id.m4id.ext.isSolid
 import dev.doctorm4id.m4id.util.M4idPool
 import dev.doctorm4id.rot.content.ModContent
 import net.minecraft.core.BlockPos
@@ -11,7 +11,9 @@ import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
 import net.minecraft.tags.BlockTags
 import net.minecraft.world.level.block.*
+import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
+import net.minecraft.world.level.block.state.properties.Property
 
 object InfestationSystem {
 
@@ -44,41 +46,25 @@ object InfestationSystem {
 	}
 
 	private fun infestBlock(level: ServerLevel, pos: BlockPos) {
-		val cyst = randomCyst.getRandomEntry() ?: return
-		val blockState = level.getBlockState(pos)
+		val oldState = level.getBlockState(pos)
 
-		val newState = when (level.getBlockState(pos).block) {
-			is StairBlock -> ModContent.ROTTED_STAIR.defaultBlockState()
-				.setValue(StairBlock.FACING, blockState.getValue(StairBlock.FACING))
-				.setValue(StairBlock.HALF, blockState.getValue(StairBlock.HALF))
-				.setValue(StairBlock.SHAPE, blockState.getValue(StairBlock.SHAPE))
-				.setValue(BlockStateProperties.WATERLOGGED, blockState.getValue(BlockStateProperties.WATERLOGGED))
-
-			is SlabBlock -> ModContent.ROTTED_SLAB.defaultBlockState()
-				.setValue(SlabBlock.TYPE, blockState.getValue(SlabBlock.TYPE))
-				.setValue(BlockStateProperties.WATERLOGGED, blockState.getValue(BlockStateProperties.WATERLOGGED))
-
-			is LeavesBlock -> ModContent.ROTTED_LEAVES.defaultBlockState()
-				.setValue(BlockStateProperties.WATERLOGGED, blockState.getValue(BlockStateProperties.WATERLOGGED))
-				.setValue(LeavesBlock.PERSISTENT, true)
-
-			is FenceBlock -> ModContent.ROTTED_FENCE.defaultBlockState()
-				.setValue(BlockStateProperties.EAST, blockState.getValue(BlockStateProperties.EAST))
-				.setValue(BlockStateProperties.SOUTH, blockState.getValue(BlockStateProperties.SOUTH))
-				.setValue(BlockStateProperties.NORTH, blockState.getValue(BlockStateProperties.NORTH))
-				.setValue(BlockStateProperties.WEST, blockState.getValue(BlockStateProperties.WEST))
-				.setValue(BlockStateProperties.WATERLOGGED, blockState.getValue(BlockStateProperties.WATERLOGGED))
-
-			is WallBlock -> ModContent.ROTTED_WALL.defaultBlockState()
-				.setValue(BlockStateProperties.EAST_WALL, blockState.getValue(BlockStateProperties.EAST_WALL))
-				.setValue(BlockStateProperties.WEST_WALL, blockState.getValue(BlockStateProperties.WEST_WALL))
-				.setValue(BlockStateProperties.NORTH_WALL, blockState.getValue(BlockStateProperties.NORTH_WALL))
-				.setValue(BlockStateProperties.SOUTH_WALL, blockState.getValue(BlockStateProperties.SOUTH_WALL))
-				.setValue(BlockStateProperties.WATERLOGGED, blockState.getValue(BlockStateProperties.WATERLOGGED))
+		val targetBlock = when (oldState.block) {
+			is StairBlock -> ModContent.ROTTED_STAIR
+			is SlabBlock -> ModContent.ROTTED_SLAB
+			is LeavesBlock -> ModContent.ROTTED_LEAVES
+			is FenceBlock -> ModContent.ROTTED_FENCE
+			is WallBlock -> ModContent.ROTTED_WALL
 
 			else -> {
-				if (blockState.canOcclude()) cyst.defaultBlockState() else return
+				if (!oldState.canOcclude()) return
+				randomCyst.getRandomEntry() ?: return
 			}
+		}
+
+		var newState = copySharedProperties(oldState, targetBlock.defaultBlockState())
+
+		if (oldState.block is LeavesBlock) {
+			newState = newState.setValue(LeavesBlock.PERSISTENT, true)
 		}
 
 		removeVeinsAttachedTo(level, pos)
@@ -86,12 +72,28 @@ object InfestationSystem {
 		placeVeinAroundBlock(level, pos)
 	}
 
+	// maybe add these two to M4id...
+	private fun copySharedProperties(source: BlockState, target: BlockState): BlockState {
+		var result = target
+
+		for (property in target.properties) {
+			if (source.hasProperty(property)) {
+				result = copyProperty(source, result, property)
+			}
+		}
+
+		return result
+	}
+	private fun <T : Comparable<T>> copyProperty(source: BlockState, target: BlockState, property: Property<T>): BlockState {
+		return target.setValue(property, source.getValue(property))
+	}
+
 	private fun placeFlora(level: ServerLevel, pos: BlockPos) {
 		val flora = randomFlora.getRandomEntry() ?: return
 		val offsetPos = pos.above()
 		val blockAbove = level.getBlockState(offsetPos)
 
-		if (level.getBlockState(offsetPos).block.defaultBlockState().isAir && !flora.defaultBlockState().isAir && M4idBlockUtil.isSolid(pos, level)) {
+		if (level.getBlockState(offsetPos).block.defaultBlockState().isAir && !flora.defaultBlockState().isAir && pos.isSolid(level)) {
 			level.setBlockAndUpdate(offsetPos, flora.defaultBlockState())
 		} else if (flora.defaultBlockState().isAir && blockAbove.`is`(BlockTags.FLOWERS) || blockAbove.block is BushBlock || blockAbove.`is`(BlockTags.CROPS)) {
 			level.destroyBlock(offsetPos, false)
@@ -124,7 +126,7 @@ object InfestationSystem {
 			val adjacentPos = pos.relative(direction)
 			val adjacentState = level.getBlockState(adjacentPos)
 
-			if (M4idBlockUtil.isAir(adjacentState)) continue
+			if (adjacentState.isAir) continue
 			if (adjacentState.`is`(ModContent.BlockTags.ROT_FAMILY)) continue
 
 			placeVeinsOnBlock(level, adjacentPos, direction)
@@ -141,7 +143,7 @@ object InfestationSystem {
 			val veinPos = blockPos.relative(face)
 			val veinState = level.getBlockState(veinPos)
 
-			if (!M4idBlockUtil.isAir(veinState) && !veinState.`is`(ModContent.ROTTED_VEIN)) continue
+			if (!veinState.isAir && !veinState.`is`(ModContent.ROTTED_VEIN)) continue
 
 			val property = MultifaceBlock.getFaceProperty(face.opposite)
 

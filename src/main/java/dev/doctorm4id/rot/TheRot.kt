@@ -1,13 +1,11 @@
 package dev.doctorm4id.rot
 
-import dev.doctorm4id.rot.platform.Platform
+import dev.doctorm4id.m4id.M4id
 import net.minecraft.resources.ResourceLocation
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 //? fabric {
-import dev.doctorm4id.rot.platform.fabric.FabricPlatform
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents
 //? }
 
 //? neoforge {
@@ -24,28 +22,18 @@ class TheRot {
 
 		@JvmField
 		val LOGGER: Logger = LoggerFactory.getLogger(MOD_ID)
-
-		private val PLATFORM: Platform = TheRot().createPlatformInstance()
 	}
 
 	fun onInitialize() {
-		LOGGER.info( "Initializing {} on {}", MOD_ID, xplat().loader() )
+		LOGGER.info( "Initializing {} on {}", MOD_ID, M4id.xplat().loader() )
 		LOGGER.debug( "{}: { version: {}; friendly_name: {} }", MOD_ID, MOD_VERSION, MOD_FRIENDLY_NAME )
+
+		TheRotConfig.init()
 	}
 
 	fun onInitializeClient() {
-		LOGGER.info( "Initializing {} Client on {}", MOD_ID, xplat().loader() )
+		LOGGER.info( "Initializing {} Client on {}", MOD_ID, M4id.xplat().loader() )
 		LOGGER.debug( "{}: { version: {}; friendly_name: {} }", MOD_ID, MOD_VERSION, MOD_FRIENDLY_NAME )
-	}
-
-	fun xplat(): Platform { return PLATFORM }
-
-	private fun createPlatformInstance(): Platform {
-		//? fabric {
-		return FabricPlatform()
-		//?} neoforge {
-		/*return NeoforgePlatform()
-		*///?}
 	}
 
 	fun id(path: String?): ResourceLocation {

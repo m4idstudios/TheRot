@@ -104,8 +104,8 @@ dependencies {
 	//  implementation(libs.moulberry.mixinconstraints)
 	// include(libs.moulberry.mixinconstraints)
 	modImplementation("net.fabricmc.fabric-api:fabric-api:${prop("deps.fabric-api")}")
-	// modLocalRuntime("com.terraformersmc:modmenu:${prop("deps.modmenu")}")
 
-	//modImplementation(files("libs/m4id-0.1.0-alpha.1-fabric+1.21.1-SNAPSHOT.jar"))
-	modImplementation("com.github.DoctorM4id.M4id:1.21.1-fabric:0.1.0-alpha.4")
+	runtimeOnly(libs.serialization.json)
+
+	modImplementation("com.github.DoctorM4id.M4id:1.21.1-fabric:0.1.0-alpha.5")
 }

@@ -1,6 +1,7 @@
 package dev.doctorm4id.rot.systems
 
-import dev.doctorm4id.m4id.util.M4idBlockUtil
+import dev.doctorm4id.m4id.ext.isExposedToAir
+import dev.doctorm4id.m4id.ext.neighborsCube
 import dev.doctorm4id.rot.content.ModContent
 import net.minecraft.core.BlockPos
 import net.minecraft.server.level.ServerLevel
@@ -21,7 +22,7 @@ class VirtualSurfaceInfectorCursor(level: ServerLevel) : VirtualCursor(level) {
 
 	override fun isObstructed(state: BlockState, pos: BlockPos): Boolean {
 
-		if (M4idBlockUtil.isAir(state)) return true
+		if (state.isAir) return true
 
 		if (visitedPositions.contains(pos.asLong())) return true
 
@@ -33,10 +34,10 @@ class VirtualSurfaceInfectorCursor(level: ServerLevel) : VirtualCursor(level) {
 	}
 
 	fun shouldInfest(level: Level, pos: BlockPos): Boolean {
-		val neighbors = M4idBlockUtil.getNeighborsCube(pos, false).filterNotNull()
+		val neighbors = pos.neighborsCube(false).filterNotNull()
 
 		val rotNeighbors = neighbors.count { level.getBlockState(it).`is`(ModContent.BlockTags.ROT_FAMILY) }
-		val exposed = if (M4idBlockUtil.isExposedToAir(pos, level)) 1.0 else 0.15
+		val exposed = if (pos.isExposedToAir(level)) 1.0 else 0.15
 		val wetBonus = if (level.getFluidState(pos).isSource) 0.2 else 0.0
 		//val distance = if (M4idBlockUtil.getBlockDistanceSquared(origin, pos) < 10 * 10) 1.0 else 0.5
 

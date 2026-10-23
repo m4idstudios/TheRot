@@ -29,7 +29,6 @@ class FabricModelProvider(output: FabricDataOutput) : FabricModelProvider(output
 	}
 
 	override fun getName(): String {
-
 		return TheRot.MOD_FRIENDLY_NAME+" Model Provider"
 	}
 }

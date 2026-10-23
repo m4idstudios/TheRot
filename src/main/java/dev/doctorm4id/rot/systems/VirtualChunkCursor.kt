@@ -1,12 +1,8 @@
 package dev.doctorm4id.rot.systems
 
-import dev.doctorm4id.rot.TheRot
-import dev.doctorm4id.rot.content.ModContent
 import net.minecraft.core.BlockPos
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.level.ChunkPos
-import net.minecraft.world.level.block.Block
-import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.chunk.LevelChunk
 import kotlin.random.Random
 
