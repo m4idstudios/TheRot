@@ -40,6 +40,8 @@ Early Looks/Peaks Downloads Available In Discord.
  
 - Rainworld o.o
 
+- There is **no** AI used at all.
+
 # FaQ (Updated: October 4th, 2026.)
 - **When next update?** Whenever modrinth approves my library that is required from the update. Matter of fact you can see a Early look in Discord/Github, make sure to install the M4id library.
 
