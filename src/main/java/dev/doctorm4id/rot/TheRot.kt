@@ -36,12 +36,4 @@ class TheRot {
 		/*return ResourceLocation(MOD_ID, path!!)
 		*///?}
 	}
-
-	fun id(namespace: String?, path: String?): ResourceLocation {
-		//? > 1.20.1 {
-		return ResourceLocation.fromNamespaceAndPath(namespace!!, path!!)
-		//?} <= 1.20.1 {
-		/*return ResourceLocation(namespace!!, path!!);
-		*///?}
-	}
 }
