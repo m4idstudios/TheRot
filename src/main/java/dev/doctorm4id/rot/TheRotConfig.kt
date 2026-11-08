@@ -6,7 +6,7 @@ import java.io.File
 object TheRotConfig {
 	private val file = DataFile.forServer(File("config/therot.json"))
 
-	var meow by file.of<String> { "cat" }
+	var meow by file.of<String> { "catT" }
 
 	fun init() {
 		file.save()
