@@ -25,7 +25,15 @@ Early Looks/Peaks Downloads Available In Discord.
 
 ---
 
-# Creator Note (Updated: October 4th, 2026.)
+<div align="center">
+  
+### (Description Updated: November 25th, 2026.)
+
+</div>
+
+---
+
+# Creator Note
 - **The Rot does NOT begin spreading on its own.** This is why the mod is currently in **Alpha**. To start an infection, enter Creative Mode and right-click a block using the **Cursor Wand**.
 
 - I am currently just using modrinth/curseforge to act as a way for people to playtest and give feedback!
@@ -42,7 +50,7 @@ Early Looks/Peaks Downloads Available In Discord.
 
 - There is **no** AI used at all.
 
-# FaQ (Updated: October 4th, 2026.)
+# FaQ
 - **When next update?** Whenever modrinth approves my library that is required from the update. Matter of fact you can see a Early look in Discord/Github, make sure to install the M4id library.
 
 - **Are you going to support Neoforge?** Yes, in the next update there will be support for neoforge. In the early looks there is a neoforge download.
@@ -51,7 +59,7 @@ Early Looks/Peaks Downloads Available In Discord.
 
 ---
 
-# Plan List (Updated: October 4th, 2026.)
+# Plan List
 
 ### Backend Stuff
 - Switching to stonecutter, which is essentially makes multi versions/loaders easier to manage and develop upon. Which does also mean I plan (atleast for 1.21.1 and higher) to support neoforge as well!
