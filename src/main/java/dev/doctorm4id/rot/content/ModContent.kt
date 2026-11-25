@@ -3,7 +3,7 @@ package dev.doctorm4id.rot.content
 import dev.doctorm4id.m4id.ext.ResourceLocation
 import dev.doctorm4id.m4id.registration.M4idAutoRegistrar
 import dev.doctorm4id.m4id.registration.M4idRegistrar
-import dev.doctorm4id.m4id.util.M4idCommonUtil
+import dev.doctorm4id.m4id.ext.copyBlockProperties
 import dev.doctorm4id.rot.TheRot
 import dev.doctorm4id.rot.content.block.BloomingCystBlock
 import dev.doctorm4id.rot.content.block.RotVeinBlock
@@ -58,22 +58,22 @@ object ModContent : M4idAutoRegistrar {
 	) }
 	val ROTTED_BLOCK_ITEM by "rotted_block" forItem { BlockItem(ROTTED_BLOCK, Item.Properties() ) }
 
-	val ROTTED_SLAB by "rotted_slab" forBlock { SlabBlock(M4idCommonUtil.copyBlockProperties(ROTTED_BLOCK)) }
+	val ROTTED_SLAB by "rotted_slab" forBlock { SlabBlock(ROTTED_BLOCK.copyBlockProperties()) }
 	val ROTTED_SLAB_ITEM by "rotted_slab" forItem { BlockItem(ROTTED_SLAB, Item.Properties()) }
 
-	val ROTTED_STAIR by "rotted_stair" forBlock { StairBlock(ROTTED_BLOCK.defaultBlockState(), M4idCommonUtil.copyBlockProperties(ROTTED_BLOCK)) }
+	val ROTTED_STAIR by "rotted_stair" forBlock { StairBlock(ROTTED_BLOCK.defaultBlockState(), ROTTED_BLOCK.copyBlockProperties()) }
 	val ROTTED_STAIR_ITEM by "rotted_stair" forItem { BlockItem(ROTTED_STAIR, Item.Properties()) }
 
-	val ROTTED_WALL by "rotted_wall" forBlock { WallBlock(M4idCommonUtil.copyBlockProperties(ROTTED_BLOCK)) }
+	val ROTTED_WALL by "rotted_wall" forBlock { WallBlock(ROTTED_BLOCK.copyBlockProperties()) }
 	val ROTTED_WALL_ITEM by "rotted_wall" forItem { BlockItem(ROTTED_WALL, Item.Properties()) }
 
-	val ROTTED_FENCE by "rotted_fence" forBlock { FenceBlock(M4idCommonUtil.copyBlockProperties(ROTTED_BLOCK)) }
+	val ROTTED_FENCE by "rotted_fence" forBlock { FenceBlock(ROTTED_BLOCK.copyBlockProperties()) }
 	val ROTTED_FENCE_ITEM by "rotted_fence" forItem { BlockItem(ROTTED_FENCE, Item.Properties()) }
 
-	val ROTTED_LEAVES by "rotted_leaves" forBlock { LeavesBlock(M4idCommonUtil.copyBlockProperties(ROTTED_BLOCK).noOcclusion().strength(0.2f)) }
+	val ROTTED_LEAVES by "rotted_leaves" forBlock { LeavesBlock(ROTTED_BLOCK.copyBlockProperties().noOcclusion().strength(0.2f)) }
 	val ROTTED_LEAVES_ITEM by "rotted_leaves" forItem { BlockItem(ROTTED_LEAVES, Item.Properties()) }
 
-	val ROTTED_GRASS by "rotted_grass" forBlock { RottedFloraBlock(M4idCommonUtil.copyBlockProperties(ROTTED_BLOCK).noCollission().offsetType(BlockBehaviour.OffsetType.XYZ).instabreak()) }
+	val ROTTED_GRASS by "rotted_grass" forBlock { RottedFloraBlock(ROTTED_BLOCK.copyBlockProperties().noCollission().offsetType(BlockBehaviour.OffsetType.XYZ).instabreak()) }
 	val ROTTED_GRASS_ITEM by "rotted_grass" forItem { BlockItem(ROTTED_GRASS, Item.Properties()) }
 
 	val NULL_CYAN by "null_cyan" forBlock { Block(BlockBehaviour.Properties.of() ) }

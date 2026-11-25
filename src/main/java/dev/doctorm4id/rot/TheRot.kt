@@ -18,14 +18,14 @@ class TheRot {
 	}
 
 	fun onInitialize() {
-		LOGGER.info( "Initializing {} on {}", MOD_ID, M4id.xplat().loader() )
+		LOGGER.info( "Initializing {} on {}", MOD_ID, M4id.SharedApi.platform )
 		LOGGER.debug( "{}: { version: {}; friendly_name: {} }", MOD_ID, MOD_VERSION, MOD_FRIENDLY_NAME )
 
 		TheRotConfig.init()
 	}
 
 	fun onInitializeClient() {
-		LOGGER.info( "Initializing {} Client on {}", MOD_ID, M4id.xplat().loader() )
+		LOGGER.info( "Initializing {} Client on {}", MOD_ID, M4id.SharedApi.platform )
 		LOGGER.debug( "{}: { version: {}; friendly_name: {} }", MOD_ID, MOD_VERSION, MOD_FRIENDLY_NAME )
 	}
 

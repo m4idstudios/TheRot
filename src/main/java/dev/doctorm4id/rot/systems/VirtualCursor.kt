@@ -1,7 +1,7 @@
 package dev.doctorm4id.rot.systems
 
+import dev.doctorm4id.m4id.M4id
 import dev.doctorm4id.m4id.ext.distanceToBlockSquared
-import dev.doctorm4id.m4id.util.M4idTickUtil
 import dev.doctorm4id.rot.content.ModContent
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet
 import net.minecraft.core.BlockPos
@@ -55,7 +55,7 @@ open class VirtualCursor(var level: ServerLevel) : ICursor {
 	}
 
 	private fun hasExpired(): Boolean {
-		return (getWorld().gameTime - creationTime) > M4idTickUtil.convertMinutesToTicks(1)
+		return (getWorld().gameTime - creationTime) > M4id.Tick.convertMinutesToTicks(1)
 	}
 
 	override fun tick() {

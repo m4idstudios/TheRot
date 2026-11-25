@@ -107,5 +107,5 @@ dependencies {
 
 	runtimeOnly(libs.serialization.json)
 
-	modImplementation("com.github.DoctorM4id.M4id:1.21.1-fabric:0.1.0-alpha.5")
+	modImplementation("com.github.DoctorM4id.M4id:1.21.1-fabric:0.1.0-alpha.6")
 }

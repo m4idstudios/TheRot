@@ -1,7 +1,7 @@
 package dev.doctorm4id.rot.systems
 
 import dev.doctorm4id.m4id.ext.isSolid
-import dev.doctorm4id.m4id.util.M4idPool
+import dev.doctorm4id.m4id.M4id
 import dev.doctorm4id.rot.content.ModContent
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
@@ -17,12 +17,12 @@ import net.minecraft.world.level.block.state.properties.Property
 
 object InfestationSystem {
 
-	private val randomCyst = M4idPool<Block>().apply {
+	private val randomCyst = M4id.Pool<Block>().apply {
 		addEntry(ModContent.ROTTED_BLOCK, 200)
 		addEntry(ModContent.BLOOMING_CYST_BLOCK, 10)
 	}
 
-	private val randomFlora = M4idPool<Block>().apply {
+	private val randomFlora = M4id.Pool<Block>().apply {
 		addEntry(Blocks.AIR, 70)
 		addEntry(ModContent.ROTTED_GRASS, 10)
 	}

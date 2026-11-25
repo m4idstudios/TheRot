@@ -30,7 +30,7 @@
   "itemGroup.rot.dev": "The Rot: Development",
 
   "item.rot.coin_of_contribution": "Coin of Contribution ❤",
-  "tooltip.rot.coin_of_contribution": "§7A little gift from the value you contributed to this mod,",
+  "tooltip.rot.coin_of_contribution1": "§7A little gift from the value you contributed to this mod,",
   "tooltip.rot.coin_of_contribution2": "§7The Rot would probably not exist or be in this current state without you!",
   "tooltip.rot.coin_of_contribution3": "§7Thank you, and enjoy The Rot mod!",
 
